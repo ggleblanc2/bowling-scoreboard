@@ -62,11 +62,11 @@ I created three model classes, `BowlingscoreboardModel`, `Bowler`, and `BowlingS
 
 `BowlingScore` is a plain Java getter/setter class that calculates the score of one game for one bowler.  Even though I'd written this class to animate the professor's Swing GUI, I had difficulty coding this class.  I finally had to write a tester application just so I could code and test this class without using the GUI I developed.
 
-Here's what I wound up doing.  I created a marks `String` for each bowler.  This made the GUI much easier to draw.  Here's an example marks `String` fram my tester application.
+Here's what I wound up doing.  I created a marks `String` for each bowler.  Here's an example marks `String` fram my tester application.
 
     X 8/72X X 81X X X XX4
     
-The `String` is made up of 20 or 21 characters.  Each character represents a throw.
+The `String` consists of up to 20 or 21 characters.  Each character represents a throw.  The spaces following strikes represent throws not taken.  This makes the String easier to parse and made the GUI easier to draw.  The `String` is built up during the game, character by character, so the `BowlingScore` class has to be able to process a partial marks `String`.
 
 The first thing I did was parse the marks `String` into frames.  Here's what the result looks like, printed.
 
@@ -74,7 +74,7 @@ The first thing I did was parse the marks `String` into frames.  Here's what the
     
 Lastly, I calculated the score for each frame.  The score is a running total pin count for the bowler.
 
-Scoring in bowling is easy to explain.  it's rather dificult to code.  The scoring rules are:
+Scoring in bowling is easy to explain.  It's rather dificult to code.  The scoring rules are:
 
 1.  A frame consists of two throws.  You may throw a third throw in the tenth frame.
 2.  Knocking down all ten pins on the first throw of the frame is called a strike, indicated by an X.
@@ -89,3 +89,25 @@ So, here is a print of the calculated score for the example marks `String` I gav
     [20, 37, 46, 74, 93, 102, 132, 162, 192, 216]
     
 As you can see, if you're good enough to throw strikes, your score can add up.  The maximum score, 12 strikes in a row, is 300.
+
+## View
+
+I created four view classes, `BowlingScoreboardFrame`, `DrawingPanel`, `AddBowlersDialog`, and `LogicalRectangles`.
+
+The `BowlingScoreboardFrame` class creates and displays the `JFrame`.  The `JFrame` uses a default `BorderLayout`.  I placed an instance of the `DrawingPanel` class in the center of the `BorderLayout`.  i created a control `JPanel` to hold the `JButtons`.  I placed an instance of the control `JPanel` at the bottom of the `BorderLayout`.
+
+The control `JPanel` uses a `BoxLayout` to hold three `JPanels`.  The top `JPanel` holds the "Add Bowlers" `JButton`.  The middle `JPanel` holds the scoring `JButtons`.  The bottom `JPanel` holds the "Reset Scoreboard" `JButton`.  All three inner `JPanels` use a `FlowLayout`.
+
+You can create a nice looking GUI by using multiple nested `JPanels`.
+
+The `BowlingScoreboardFrame` class has methods to enable and disable various `JButtons`.  This helps keep the user from accidently (or deliberately) left-clicking the wrong `JButton`.  This helps minimize the amount of error checking that the GUI has to perform.  There's also a method tto repaint the `DrawingPanel` instance.
+
+The `DrawingPanel` class extends a `JPanel` to create a drawing panel.
+
+The only time you should extend a Swing component, or any java class, is when you want to override one or more class methods.  In the `DrawwingPanel` class, we override the `paintComponent` method to draw or paint the bowling scoreboard.
+
+I definitely did not code this entire class at one time.  I coded a little at a time and tested a lot of times.  The class wasan't designed.  It grew as I needed it to grow.  And yes, the final result is a brittle mess.  It works, but that's the only nice thing i can say about the drawing code.
+
+The `AddBowlerDialog` is a `JDialog`.  The inner `JPanel` uses a `GridBagLayout` to create a form.  I get the maximum number of bowlers from the `BowlingScoreboardModel` class to generate the same number of name and handicap `JTextFields`.  There's not much error checking in the dialog.  I do tie the enter key to the "OK" `JButton` to make it easier for the user to fill out the form.
+
+The `LogicalRectangles` class came about while I coded the `DrawingPanel` class.  I needed to be able to draw the marks and scores as the game progressed, so I decided to use `java.awt.Rectangle` instances to hold the logical rectangles that make up the name, mark, and score boxes.  I'd originally put these logical rectangles in the `DrawingPanel` class but the `DrawingPanel` class got so large, I decided to create a separate class for the logical rectangles.  Even though the logical rectangles are a model for the `DrawingPanel` class, I decided that the class was still part of the view, and not the application model. 
