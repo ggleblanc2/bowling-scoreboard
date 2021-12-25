@@ -74,7 +74,7 @@ The first thing I did was parse the marks `String` into frames.  Here's what the
     
 Lastly, I calculated the score for each frame.  The score is a running total pin count for the bowler.
 
-Scoring in bowling is easy to explain.  It's rather dificult to code.  The scoring rules are:
+Scoring in bowling is easy to explain.  It's rather difficult to code.  The scoring rules are:
 
 1.  A frame consists of two throws.  You may throw a third throw in the tenth frame.
 2.  Knocking down all ten pins on the first throw of the frame is called a strike, indicated by an X.
