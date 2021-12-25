@@ -54,7 +54,7 @@ To summarize, in a Swing application, the MVC pattern looks like this:
 
 ### Model
 
-I created three model classes, `BowlingscoreboardModel`, `Bowler`, and `BowlingScore`.  
+I created three model classes, `BowlingScoreboardModel`, `Bowler`, and `BowlingScore`.  
 
 `BowlingScoreboardModel` is the main application model class.  `BowlingSoreboardModel` is a plain Java getter/setter class.  It holds `int` fields to indicate the current frame, bowler, and throw.  It also holds `int` fields to indicate the number of bowlers and the maximum number of bowlers.  Finally, the model class holds an array of `Bowler` instances and an array of `BowlingScore` instances.
 
@@ -62,7 +62,7 @@ I created three model classes, `BowlingscoreboardModel`, `Bowler`, and `BowlingS
 
 `BowlingScore` is a plain Java getter/setter class that calculates the score of one game for one bowler.  Even though I'd written this class to animate the professor's Swing GUI, I had difficulty coding this class.  I finally had to write a tester application just so I could code and test this class without using the GUI I developed.
 
-Here's what I wound up doing.  I created a marks `String` for each bowler.  Here's an example marks `String` fram my tester application.
+Here's what I wound up doing.  I created a marks `String` for each bowler.  Here's an example marks `String` from my tester application.
 
     X 8/72X X 81X X X XX4
     
@@ -84,8 +84,10 @@ Scoring in bowling is easy to explain.  It's rather dificult to code.  The scori
 6.  If you get a strike, your score is 10 plus the number of pins you knock down on the next two throws.
 7.  If you get a strike or a spare in the tenth frame, you get one additional throw.
 
-So, here is a print of the calculated score for the example marks `String` I gave.
+So, here is a print of the marks `String`, the parsed frames, and the calculated score all together.
 
+    X 8/72X X 81X X X XX4
+    [X , 8/, 72, X , X , 81, X , X , X , XX4]
     [20, 37, 46, 74, 93, 102, 132, 162, 192, 216]
     
 As you can see, if you're good enough to throw strikes, your score can add up.  The maximum score, 12 strikes in a row, is 300.
@@ -111,3 +113,15 @@ I definitely did not code this entire class at one time.  I coded a little at a 
 The `AddBowlerDialog` is a `JDialog`.  The inner `JPanel` uses a `GridBagLayout` to create a form.  I get the maximum number of bowlers from the `BowlingScoreboardModel` class to generate the same number of name and handicap `JTextFields`.  There's not much error checking in the dialog.  I do tie the enter key to the "OK" `JButton` to make it easier for the user to fill out the form.
 
 The `LogicalRectangles` class came about while I coded the `DrawingPanel` class.  I needed to be able to draw the marks and scores as the game progressed, so I decided to use `java.awt.Rectangle` instances to hold the logical rectangles that make up the name, mark, and score boxes.  I'd originally put these logical rectangles in the `DrawingPanel` class but the `DrawingPanel` class got so large, I decided to create a separate class for the logical rectangles.  Even though the logical rectangles are a model for the `DrawingPanel` class, I decided that the class was still part of the view, and not the application model. 
+
+### Controller
+
+I created two controller classes, `AddBowlersListener` and `AddMarksListener`.  I also created several anonymous `ActionListener` classes.
+
+The `AddBowlersListener` class implements an `ActionListener` that responds to the "OK" `JButton` on the `AddBowlerDialog`.  This class does a small bit of error chacking, creates the `Bowler` instances in the application model, and redraws the `DrawingPanel` to include the bowler's names and handicaps.
+
+The `AddMarksListener` class implements an `ActionListener` that responds to any of the scoring `JButtons` on the `BowlingScoreboardFrame`.  This class enables and disables the appropriate scoring `JButtons` and adds characters to the marks `String` for each bowler.
+
+## Epilog
+
+As you can tell by now, I'm a huge fan of descriptive class names.  I try to end the class names with a descriptor, like model, frame, panel, or listener, so I can tell at a glance what type of GUI class I'm dealing with.
