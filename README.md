@@ -36,7 +36,7 @@ If you’re not familiar with Java Swing, Oracle has an excellent tutorial to ge
 
 Whenever I create a Swing GUI, I use the [model / view / controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) (MVC) pattern.  This pattern allows me to more easily separate my concerns and focus on one part of the Swing application at a time.
 
-I create a logical model of the game using one or more plain Java getter / setter classes.  For this particular Swing application, I created three model classes.
+I create a logical model of the application using one or more plain Java getter / setter classes.  For this particular Swing application, I created three model classes.
 
 The view consists of a `JFrame`, a drawing `JPanel`, and a control `JPanel`.
 
@@ -44,7 +44,7 @@ The controller consists of as many listener classes as you need to perform the G
 
 The reason it's called the MVC pattern is you create the model first, then the view, then the controller.  This is usually not a waterfall process.  You create as much of the model as you can think of, then when you're working on the view, you realize that some pieces of the model are missing.  Even when you're writing controller classes, you can still discover missing pieces of the model.
 
-For this particular application, I created the view first.  A bowling scoreboard has a very standard appearance.  After creating the view, I created a model to support the view.  the model went through several iterations before I was satisifed.  As I said, this is usually not a waterfall process.
+For this particular application, I created the view first.  A bowling scoreboard has a very standard appearance.  After creating the view, I created a model to support the view.  The model went through several iterations before I was satisifed.  As I said, this is usually not a waterfall process.
 
 To summarize, in a Swing application, the MVC pattern looks like this:
 
@@ -66,7 +66,7 @@ Here's what I wound up doing.  I created a marks `String` for each bowler.  Here
 
     X 8/72X X 81X X X XX4
     
-The `String` consists of up to 20 or 21 characters.  Each character represents a throw.  The spaces following strikes represent throws not taken.  This makes the String easier to parse and made the GUI easier to draw.  The `String` is built up during the game, character by character, so the `BowlingScore` class has to be able to process a partial marks `String`.
+The `String` consists of up to 20 or 21 characters.  Each character represents a throw.  The spaces following strikes represent throws not taken.  This makes the `String` easier to parse and makes the GUI easier to draw.  The `String` is built up during the game, character by character, so the `BowlingScore` class has to be able to process a partial marks `String`.
 
 The first thing I did was parse the marks `String` into frames.  Here's what the result looks like, printed.
 
@@ -102,13 +102,13 @@ The control `JPanel` uses a `BoxLayout` to hold three `JPanels`.  The top `JPane
 
 You can create a nice looking GUI by using multiple nested `JPanels`.
 
-The `BowlingScoreboardFrame` class has methods to enable and disable various `JButtons`.  This helps keep the user from accidently (or deliberately) left-clicking the wrong `JButton`.  This helps minimize the amount of error checking that the GUI has to perform.  There's also a method tto repaint the `DrawingPanel` instance.
+The `BowlingScoreboardFrame` class has methods to enable and disable various `JButtons`.  This helps keep the user from accidently (or deliberately) left-clicking the wrong `JButton`.  This helps minimize the amount of error checking that the GUI has to perform.  There's also a method to repaint the `DrawingPanel` instance.
 
 The `DrawingPanel` class extends a `JPanel` to create a drawing panel.
 
-The only time you should extend a Swing component, or any java class, is when you want to override one or more class methods.  In the `DrawwingPanel` class, we override the `paintComponent` method to draw or paint the bowling scoreboard.
+The only time you should extend a Swing component, or any Java class, is when you want to override one or more class methods.  In the `DrawwingPanel` class, we override the `paintComponent` method to draw or paint the bowling scoreboard.
 
-I definitely did not code this entire class at one time.  I coded a little at a time and tested a lot of times.  The class wasan't designed.  It grew as I needed it to grow.  And yes, the final result is a brittle mess.  It works, but that's the only nice thing i can say about the drawing code.
+I definitely did not code this entire class at one time.  I coded a little at a time and tested a lot of times.  The class wasn't designed.  It grew as I needed it to grow.  And yes, the final result is a brittle mess.  It works, but that's the only nice thing i can say about the drawing code.
 
 The `AddBowlerDialog` is a `JDialog`.  The inner `JPanel` uses a `GridBagLayout` to create a form.  I get the maximum number of bowlers from the `BowlingScoreboardModel` class to generate the same number of name and handicap `JTextFields`.  There's not much error checking in the dialog.  I do tie the enter key to the "OK" `JButton` to make it easier for the user to fill out the form.
 
