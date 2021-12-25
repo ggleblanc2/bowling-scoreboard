@@ -76,13 +76,14 @@ Lastly, I calculated the score for each frame.  The score is a running total pin
 
 Scoring in bowling is easy to explain.  It's rather difficult to code.  The scoring rules are:
 
-1.  A frame consists of two throws.  You may throw a third throw in the tenth frame.
+1.  A game consists of 10 frames.
+2.  A frame consists of two throws.  You may throw a third throw in the tenth frame.
 2.  Knocking down all ten pins on the first throw of the frame is called a strike, indicated by an X.
-3.  Knocking down all ten pins on two throws in the frame is called a spare, indicated by a slash (/).
-4.  If you knock down less then 10 pins in two throws, your score for the frame is the number of pins you knocked down.
-5.  If you get a spare, your score is 10 plus the number of pins you knock down on the next throw.
-6.  If you get a strike, your score is 10 plus the number of pins you knock down on the next two throws.
-7.  If you get a strike or a spare in the tenth frame, you get one additional throw.
+4.  Knocking down all ten pins on two throws in the frame is called a spare, indicated by a slash (/).
+5.  If you knock down less then 10 pins in two throws, your score for the frame is the number of pins you knocked down.
+6.  If you get a spare, your score is 10 plus the number of pins you knock down on the next throw.
+7.  If you get a strike, your score is 10 plus the number of pins you knock down on the next two throws.
+8.  If you get a strike or a spare in the tenth frame, you get one additional throw.
 
 So, here is a print of the marks `String`, the parsed frames, and the calculated score all together.
 
