@@ -92,7 +92,7 @@ So, here is a print of the marks `String`, the parsed frames, and the calculated
     
 As you can see, if you're good enough to throw strikes, your score can add up.  The maximum score, 12 strikes in a row, is 300.
 
-## View
+### View
 
 I created four view classes, `BowlingScoreboardFrame`, `DrawingPanel`, `AddBowlersDialog`, and `LogicalRectangles`.
 
