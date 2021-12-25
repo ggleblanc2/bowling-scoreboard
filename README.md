@@ -106,7 +106,7 @@ The `BowlingScoreboardFrame` class has methods to enable and disable various `JB
 
 The `DrawingPanel` class extends a `JPanel` to create a drawing panel.
 
-The only time you should extend a Swing component, or any Java class, is when you want to override one or more class methods.  In the `DrawwingPanel` class, we override the `paintComponent` method to draw or paint the bowling scoreboard.
+The only time you should extend a Swing component, or any Java class, is when you want to override one or more class methods.  In the `DrawingPanel` class, we override the `paintComponent` method to draw or paint the bowling scoreboard.
 
 I definitely did not code this entire class at one time.  I coded a little at a time and tested a lot of times.  The class wasn't designed.  It grew as I needed it to grow.  And yes, the final result is a brittle mess.  It works, but that's the only nice thing i can say about the drawing code.
 
